@@ -190,9 +190,18 @@
       "name": "meta.gather"
     },
     "multiLineLogic": {
-      "begin": "^\\s*\\{[\\w_\\s\\*\/\\-\\+\\&amp;\\|\\%\\&lt;\\&gt;\\.\\\\]+:??=[^}]+$",
+      "begin": "^\\s*(\\{)([\\w_\\s\\*\\/\\-\\+\\&\\|\\%\\<\\>\\.\\(\\)]+(:))?(?=[^}]+$)",
       "beginCaptures": {
+        "0": {
+          "name": "keyword.operator.logic"
+        },
         "1": {
+          "name": "keyword.operator.logic"
+        },
+        "2": {
+          "name": "keyword.operator.logic"
+        },
+        "3": {
           "name": "keyword.operator.logic"
         }
       },
@@ -317,10 +326,19 @@
       "name": "meta.logic"
     },
     "logicLine": {
-      "match": "\\s*(~\\s*.*)$",
+      "match": "\\s*(~)(\\s*.*)$",
       "captures": {
-        "0": {
+        "1": {
           "name": "meta.logic"
+          },
+        "2": {
+          "name": "meta.logic",
+          "patterns": [
+              {
+                  "match": "(\"[^\"]*\")",
+                  "name": "string.ink"
+              }
+          ]
         }
       }
     },
