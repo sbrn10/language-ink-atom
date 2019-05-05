@@ -60,6 +60,9 @@
     },
     {
       "include": "#statements"
+    },
+    {
+      "include": "#tags"
     }
   ],
   "repository": {
@@ -197,7 +200,7 @@
       "end": "(\\})",
       "endCaptures": {
         "1": {
-          "name": "keyword.operator"
+          "name": "keyword.operator.logic"
         }
       },
       "contentName": "meta.multilineLogicInner",
@@ -228,7 +231,7 @@
             },
             {
               "include": "#gather"
-            }
+          }
           ]
         },
         {
@@ -239,15 +242,21 @@
         },
         {
           "include": "#gather"
+        },
+        {
+          "include": "#mixedContent"
         }
       ]
     },
     "inlineConditional": {
-      "begin": "(\\{)[^:\\|\\}]+:",
+      "begin": "(\\{)([^:\\|\\}]+:)",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.inlineConditionalStart"
-        }
+         },
+        "2": {
+          "name": "keyword.operator.inlineConditionalCondition"
+          }
       },
       "end": "(\\})",
       "endCaptures": {
@@ -351,6 +360,9 @@
         {
           "match": "<>",
           "name": "constant.glue"
+        },
+        {
+          "include": "text.html.basic"
         }
       ]
     },
@@ -384,6 +396,21 @@
           "include": "#mixedContent"
         }
       ]
+    },
+    "tags": {
+        "patterns": [
+            {
+                "begin": "((?<!\\\\)\\#)",
+                "end": "$",
+                "name": "string.tag.ink string.unquoted.ink",
+                "patterns": [
+                    {
+                        "include": "#comments"
+                    }
+                ]
+            }
+        ]
+
     }
   }
 }
