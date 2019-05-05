@@ -154,7 +154,12 @@
               "name": "keyword.operator.weaveBracket"
             },
             "2": {
-              "name": "string.content"
+              "name": "string.content",
+              "patterns": [
+                {
+                "include": "#mixedContent"
+                }
+              ]
             },
             "3": {
               "name": "keyword.operator.weaveBracket"
@@ -185,15 +190,9 @@
       "name": "meta.gather"
     },
     "multiLineLogic": {
-      "begin": "^\\s*(\\{)([\\w_\\s\\*\\/\\-\\+\\&\\|\\%\\<\\>\\.\\(\\)]+(:))?(?=[^}]+$)",
+      "begin": "^\\s*\\{[\\w_\\s\\*\/\\-\\+\\&amp;\\|\\%\\&lt;\\&gt;\\.\\\\]+:??=[^}]+$",
       "beginCaptures": {
-        "0": {
-          "name": "meta.logicBegin"
-        },
         "1": {
-          "name": "keyword.operator.logic"
-        },
-        "3": {
           "name": "keyword.operator.logic"
         }
       },
@@ -252,16 +251,16 @@
       "begin": "(\\{)([^:\\|\\}]+:)",
       "beginCaptures": {
         "1": {
-          "name": "keyword.operator.inlineConditionalStart"
+          "name": "keyword.operator.inlineLogic.inlineConditionalStart"
          },
         "2": {
-          "name": "keyword.operator.inlineConditionalCondition"
+          "name": "keyword.operator.inlineLogic"
           }
       },
       "end": "(\\})",
       "endCaptures": {
         "1": {
-          "name": "keyword.operator.inlineConditionalEnd"
+          "name": "keyword.operator.inlineLogic.inlineConditionalEnd"
         }
       },
       "name": "entity.inlineConditional",
@@ -279,23 +278,23 @@
       "begin": "(\\{)\\s*(~|&|!|\\$)?(?=([^\\|]*\\|(?!\\|)[^\\}]*)\\})",
       "beginCaptures": {
         "1": {
-          "name": "keyword.operator.inlineSequenceStart"
+          "name": "keyword.operator.inlineLogic.inlineSequenceStart"
         },
         "2": {
-          "name": "keyword.operator.inlineSequenceTypeChar"
+          "name": "keyword.operator.inlineLogic.inlineSequenceTypeChar"
         }
       },
       "end": "\\}",
       "endCaptures": {
         "0": {
-          "name": "keyword.operator.inlineSequenceEnd"
+          "name": "keyword.operator.inlineLogic.inlineSequenceEnd"
         }
       },
       "name": "entity.inlineSequence",
       "patterns": [
         {
           "match": "\\|(?!\\|)",
-          "name": "keyword.operator.inlineSequenceSeparator"
+          "name": "keyword.operator.inlineLogic.inlineSequenceSeparator"
         },
         {
           "include": "#mixedContent"
@@ -306,13 +305,13 @@
       "begin": "(\\{)",
       "beginCaptures": {
         "1": {
-          "name": "keyword.operator.inlineLogicStart"
+          "name": "keyword.operator.inlineLogic.inlineLogicStart"
         }
       },
       "end": "(\\})",
       "endCaptures": {
         "1": {
-          "name": "keyword.operator.inlineLogicEnd"
+          "name": "keyword.operator.inlineLogic.inlineLogicEnd"
         }
       },
       "name": "meta.logic"
@@ -398,19 +397,18 @@
       ]
     },
     "tags": {
-        "patterns": [
+      "patterns": [
+        {
+          "begin": "((?<!\\\\)\\#)",
+          "end": "$",
+          "name": "string.tag.ink string.unquoted.ink",
+          "patterns": [
             {
-                "begin": "((?<!\\\\)\\#)",
-                "end": "$",
-                "name": "string.tag.ink string.unquoted.ink",
-                "patterns": [
-                    {
-                        "include": "#comments"
-                    }
-                ]
+              "include": "#comments"
             }
-        ]
-
+          ]
+        }
+      ]
     }
   }
 }
